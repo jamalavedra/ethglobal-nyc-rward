@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 
 import { Web3Context } from "@/contexts/Web3Context";
 import { isBlockchainAddress } from "@/utils/stringUtils";
 import SignedInMenu from "./SignedInMenu";
 
-const DashboardShell = ({ title, active, children, searchbox }) => {
+const DashboardShell = ({ title, active, children }) => {
   const { connectWallet, signerAddress } = useContext(Web3Context);
 
   // Not logged in
@@ -40,16 +40,30 @@ const DashboardShell = ({ title, active, children, searchbox }) => {
   } else if (isBlockchainAddress(signerAddress)) {
     //Logged in
     return (
-      <div>
-        <div className="flex-col min-w-full relative ">
-          <div className="z-30 w-full bg-gray-100 fixed flex items-center justify-between">
-            <p>{title}</p>
-            {Boolean(searchbox) === true ? searchbox : <></>}
-            <SignedInMenu />
+      <>
+        <header className="bg-gray-50">
+          <div className="max-w-screen-xl px-4 py-8 mx-auto sm:py-12 sm:px-6 lg:px-8">
+            <div className="sm:justify-between sm:items-center sm:flex">
+              <div className="text-center sm:text-left">
+                <h1 className="text-2xl font-medium text-gray-900 sm:text-3xl">
+                  Welcome to{" "}
+                  <span className="italic font-extrabold">rward</span>
+                </h1>
+
+                <p className="mt-1.5 text-sm text-gray-500">
+                  Let's reward your users!
+                </p>
+              </div>
+              <div className="flex flex-col gap-4 mt-4 sm:flex-row sm:mt-0 sm:items-center">
+                <SignedInMenu />
+              </div>
+            </div>
           </div>
+        </header>
+        <div className="max-w-screen-xl px-4 py-8 mx-auto sm:py-12 sm:px-6 lg:px-8">
           <div className="mt-16 flex-col">{children}</div>
         </div>
-      </div>
+      </>
     );
   } else {
     return (

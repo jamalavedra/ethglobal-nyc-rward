@@ -202,8 +202,6 @@ export const Web3ContextProvider = ({ children }) => {
   }
 
   async function updateAuthToken(signerAddress, chainName, tempProvider) {
-    console.log("update auth token");
-
     let timestamp = Date.now();
     let data = `I allow this site to access my data on Rward using the account ${signerAddress}. Timestamp:${timestamp}`;
 
