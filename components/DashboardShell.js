@@ -51,7 +51,7 @@ const DashboardShell = ({ title, active, children }) => {
                 </h1>
 
                 <p className="mt-1.5 text-sm text-gray-500">
-                  Let's reward your users!
+                  {"Let's reward your users!"}
                 </p>
               </div>
               <div className="flex flex-col gap-4 mt-4 sm:flex-row sm:mt-0 sm:items-center">

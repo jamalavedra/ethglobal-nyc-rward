@@ -177,7 +177,7 @@ const Dashboard = () => {
           </div>
         )
       ) : (
-        <Text>Loading</Text>
+        <p>Loading</p>
       )}
     </DashboardShell>
   );
