@@ -5,25 +5,21 @@ import { signIn } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import fetcher from "@/utils/fetcher";
+import axios from "axios";
 
 const Dashboard = () => {
   const { data: session } = useSession();
   const router = useRouter();
 
   const [content, setContent] = useState();
-  const client = new PrivyClient({
-    session: content,
-  });
+
   let [state, setState] = useState();
   // Fetch content from protected route
   useEffect(() => {
     if (session) {
       const fetchData = async () => {
         const session_privy = new CustomSession(async function authenticate() {
-          const response = await fetcher(`/api/tokenPrivy`, "POST", {
-            address: router.query.address,
-          });
-
+          const response = await axios.post(`/api/tokenPrivy`);
           return response.data.token;
         });
         console.log("session_privy", session_privy);
@@ -35,13 +31,15 @@ const Dashboard = () => {
 
   const fetchDataFromPrivy = async () => {
     try {
+      const client = new PrivyClient({
+        session: content,
+      });
       // If this is a refresh, we need to pull the address into state
-
+      console.log(router.query.address);
       // Fetch user's name and favorite color from Privy
-      const [email] = await client.get(router.query.address, [
+      const [email, mnemonic] = await client.get(router.query.address, [
         "email",
         "mnemonic",
-        "private-key",
       ]);
 
       setState({
@@ -49,7 +47,6 @@ const Dashboard = () => {
         userId: router.query.address,
         email: email?.text(),
         mnemonic: mnemonic?.text(),
-        "private-key": email?.text(),
       });
     } catch (error) {
       console.log(error);
@@ -58,13 +55,8 @@ const Dashboard = () => {
   // When the page first loads, check if there is a connected wallet and get
   // user data associated with this wallet from Privy
   useEffect(() => {
-    if (!state) {
-      console.log("fetchDataFromPrivy");
-      fetchDataFromPrivy();
-    } else {
-      console.log("nein");
-    }
-  }, [client]);
+    fetchDataFromPrivy();
+  }, [content]);
 
   return (
     <>
@@ -114,16 +106,16 @@ const Dashboard = () => {
 
               <p>
                 <span className="font-bold">{"Private Key: "}</span>
-                {state["private-key"]}
+                {/* {state["private-key"]} */}
               </p>
+              <button
+                className="text-sm underline text-gray-700"
+                onClick={() => signOut()}
+              >
+                Sign out
+              </button>
             </div>
           )}
-          <button
-            className="text-sm underline text-gray-700"
-            onClick={() => signOut()}
-          >
-            Sign out
-          </button>
         </div>
       )}
     </>

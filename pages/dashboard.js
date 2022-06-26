@@ -12,6 +12,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { prettifyNumber } from "@/utils/stringUtils";
+import Link from "next/link";
 
 const monthNames = [
   "Jan",
@@ -207,7 +208,9 @@ const Dashboard = () => {
                   {batchData.map((user) => (
                     <tr key={user.user_id}>
                       <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
-                        {user.user_id}
+                        <Link href={"/claim/" + user.user_id}>
+                          <a className="underline">{user.user_id}</a>
+                        </Link>
                       </td>
 
                       <td className="px-4 py-2 text-gray-700 whitespace-nowrap">
