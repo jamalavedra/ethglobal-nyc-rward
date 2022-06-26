@@ -214,10 +214,7 @@ const Dashboard = () => {
                       </td>
 
                       <td className="px-4 py-2 text-gray-700 whitespace-nowrap">
-                        {/* {user.data[0] !== null
-                          ? user.data[0].plaintext.text()
-                          : "N/A"} */}
-                        {"N/A"}
+                        {user.data[0] !== null ? user.data.text() : "N/A"}
                       </td>
                       <td className="px-4 py-2 text-gray-700 whitespace-nowrap">
                         ❌

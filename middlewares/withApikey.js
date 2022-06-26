@@ -55,13 +55,20 @@ const withApikey = (next) => async (req, res) => {
       // Valid API key
       if (data[1][1] && parseInt(data[1][1]) >= CAP) {
         // Over the limit
+
         res.setHeader("X-Rate-Limit-Limit", CAP);
         res.setHeader("X-Rate-Limit-Remaining", 0);
         return res.status(429).end("Rate limit exceeded");
       } else {
         client.incr(`${user_apikey}-usage-${date}`);
         res.setHeader("X-Rate-Limit-Limit", CAP);
-        res.setHeader("X-Rate-Limit-Remaining", CAP - parseInt(data[1][1]) - 1);
+        if (data[1][1]) {
+          res.setHeader(
+            "X-Rate-Limit-Remaining",
+            CAP - parseInt(data[1][1]) - 1
+          );
+        }
+        console.log("next");
         return await next(req, res);
       }
     } else {

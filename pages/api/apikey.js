@@ -11,7 +11,9 @@ const handler = async (req, res) => {
 
       if (valAuthResp === true) {
         // return all apikey data.
+
         let resp = await getApikeyData(req.query.signerAddress);
+
         return res.status(200).json({
           success: true,
           ...resp,

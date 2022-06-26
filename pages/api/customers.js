@@ -37,22 +37,32 @@ const handler = async (req, res) => {
             0
           );
 
-          const privateKey =
-            await polygonSDK.wallet.generatePrivateKeyFromMnemonic(
-              mnemonic,
-              0,
-              { testnet: true }
-            );
+          const privateKey = await polygonSDK.wallet.generatePrivateKeyFromMnemonic(
+            mnemonic,
+            0,
+            { testnet: true }
+          );
 
           await privyClient.put(
             addressFromXpub,
 
             [
-              { field: email, value: req.body?.email },
+              { field: "email", value: req.body?.email },
               { field: "private-key", value: privateKey },
               { field: "mnemonic", value: mnemonic },
             ]
           );
+
+          await privyClient.updateUserPermissions(addressFromXpub, [
+            {
+              field_id: "private-key",
+              access_group: "self",
+            },
+            {
+              field_id: "mnemonic",
+              access_group: "self",
+            },
+          ]);
           return res.status(200).json({
             _id: addressFromXpub,
             email: req.body?.email,

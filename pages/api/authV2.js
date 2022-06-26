@@ -29,8 +29,9 @@ function validateMessageRules(siweObj) {
 }
 
 const handler = async (req, res) => {
-  let rwardInstance = new Convo("CS2v5qdHaGTmuMZ1Mg9uWHHi6Nz0ZqayGBflnst8");
   try {
+    let rwardInstance = new Convo("CS2v5qdHaGTmuMZ1Mg9uWHHi6Nz0ZqayGBflnst8");
+
     let siweObj;
 
     // Check if params were passed
