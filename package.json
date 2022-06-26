@@ -20,6 +20,7 @@
     "@privy-io/privy-node": "^0.0.1",
     "@rward.xyz/sdk": "latest",
     "@tatumio/polygon": "2.0.1-alpha.247",
+    "@tatumio/tatum": "^1.35.8",
     "@walletconnect/web3-provider": "^1.7.5",
     "axios": "^0.27.2",
     "ethers": "^5.6.0",
