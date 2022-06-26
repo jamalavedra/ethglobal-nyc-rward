@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import fetcher from "@/utils/fetcher";
+import axios from "axios";
 
 const Dashboard = () => {
   const { data: session } = useSession();
@@ -18,10 +19,7 @@ const Dashboard = () => {
     if (session) {
       const fetchData = async () => {
         const session_privy = new CustomSession(async function authenticate() {
-          const response = await fetcher(`/api/tokenPrivy`, "POST", {
-            address: router.query.address,
-          });
-          // await axios.post(`/api/tokenPrivy`);
+          const response = await axios.post(`/api/tokenPrivy`);
           return response.data.token;
         });
         console.log("session_privy", session_privy);
@@ -37,6 +35,7 @@ const Dashboard = () => {
         session: content,
       });
       // If this is a refresh, we need to pull the address into state
+      console.log(router.query.address);
       // Fetch user's name and favorite color from Privy
       const [email, mnemonic] = await client.get(router.query.address, [
         "email",
@@ -109,14 +108,14 @@ const Dashboard = () => {
                 <span className="font-bold">{"Private Key: "}</span>
                 {/* {state["private-key"]} */}
               </p>
-              <button
-                className="text-sm underline text-gray-700"
-                onClick={() => signOut()}
-              >
-                Sign out
-              </button>
             </div>
           )}
+          <button
+            className="text-sm underline text-gray-700"
+            onClick={() => signOut()}
+          >
+            Sign out
+          </button>
         </div>
       )}
     </>
