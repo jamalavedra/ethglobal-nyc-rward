@@ -45,7 +45,7 @@ const Footer = () => {
             </a>
           </div>
 
-          <nav className="relative flex flex-wrap justify-center gap-8 p-8 text-sm font-bold border-4 border-black rounded-xl">
+          <nav className="relative flex flex-wrap justify-center gap-8 p-8 text-sm font-bold -4 rounded-xl">
             <a
               className="hover:opacity-75"
               href="https://mirror.xyz/0x6e20905567d9faecfb2D5CBAAeA1766359C95a76"

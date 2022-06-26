@@ -13,15 +13,18 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Welcome to Rward</h1>
+        <h1 className={styles.title}>rward</h1>
 
         <div className={styles.grid}>
           <Link href="/dashboard">
-            <a className={styles.card}>
-              <h2>Get key &rarr;</h2>
-              <p>Add token rewards to your app</p>
+            <a className="mt-10 block px-5 py-3 text-sm font-medium text-white transition bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring">
+              {"Get Free API Key ->"}
             </a>
           </Link>
+        </div>
+        <div className="p-4 m-5 border border-gray-200 rounded">
+          <p>{"Install Our SDK"}</p>
+          <p className={styles.code}>{"yarn add @rward.xyz/sdk"}</p>
         </div>
       </main>
       <Footer />

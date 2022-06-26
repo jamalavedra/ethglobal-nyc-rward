@@ -2,6 +2,9 @@
   "name": "rward",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "<16"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,13 +16,18 @@
     "@gnosis.pm/safe-apps-web3modal": "^12.0.0",
     "@hapi/iron": "^6.0.0",
     "@heroicons/react": "^1.0.6",
+    "@privy-io/privy-browser": "^0.0.1",
+    "@privy-io/privy-node": "^0.0.1",
     "@rward.xyz/sdk": "latest",
+    "@tatumio/polygon": "2.0.1-alpha.247",
     "@walletconnect/web3-provider": "^1.7.5",
+    "axios": "^0.27.2",
     "ethers": "^5.6.0",
     "ioredis": "^4.28.5",
     "js-cookie": "^3.0.1",
     "jsonwebtoken": "^8.5.1",
     "next": "12.1.6",
+    "next-auth": "^4.6.1",
     "prop-types": "^15.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
