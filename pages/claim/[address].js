@@ -42,7 +42,6 @@ const Dashboard = () => {
         "email",
         "mnemonic",
       ]);
-      console.log(email?.text(), mnemonic?.text());
 
       setState({
         ...state,
@@ -110,14 +109,14 @@ const Dashboard = () => {
                 <span className="font-bold">{"Private Key: "}</span>
                 {/* {state["private-key"]} */}
               </p>
+              <button
+                className="text-sm underline text-gray-700"
+                onClick={() => signOut()}
+              >
+                Sign out
+              </button>
             </div>
           )}
-          <button
-            className="text-sm underline text-gray-700"
-            onClick={() => signOut()}
-          >
-            Sign out
-          </button>
         </div>
       )}
     </>

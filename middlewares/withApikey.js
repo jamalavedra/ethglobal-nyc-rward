@@ -53,7 +53,7 @@ const withApikey = (next) => async (req, res) => {
     console.log(data);
     if (data[0][1] == "true") {
       // Valid API key
-      if (parseInt(data[1][1]) >= CAP) {
+      if (data[1][1] && parseInt(data[1][1]) >= CAP) {
         // Over the limit
         res.setHeader("X-Rate-Limit-Limit", CAP);
         res.setHeader("X-Rate-Limit-Remaining", 0);
