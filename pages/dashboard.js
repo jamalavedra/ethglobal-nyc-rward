@@ -85,7 +85,6 @@ const Dashboard = () => {
           `/api/batchPrivy?token=${authToken}&signerAddress=${signerAddress}`
         ).then((data) => {
           console.log(data);
-
           setBatchData(data.users);
         });
       });

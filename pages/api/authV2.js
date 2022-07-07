@@ -30,6 +30,7 @@ function validateMessageRules(siweObj) {
 
 const handler = async (req, res) => {
   try {
+    console.log("first instance prod.");
     let rwardInstance = new Convo("CS2v5qdHaGTmuMZ1Mg9uWHHi6Nz0ZqayGBflnst8");
 
     let siweObj;
@@ -66,15 +67,17 @@ const handler = async (req, res) => {
         req.body.message,
         req.body.signature
       );
-
+      console.log("message verified");
       if (getAddress(siweObj.address) === getAddress(recoveredAddress)) {
+        console.log("address equal");
         let token = jwt.sign(
           { user: siweObj.address, chain: "ethereum" },
           process.env.JWT_SECRET,
           { expiresIn: "1d" }
         );
+        console.log("jwt signed");
         token = await seal(token, process.env.JWT_SECRET, defaults);
-
+        console.log("sealed");
         return res.status(200).json({
           success: true,
           message: token,

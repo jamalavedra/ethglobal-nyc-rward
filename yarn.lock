@@ -1106,14 +1106,6 @@
     "@gnosis.pm/safe-react-gateway-sdk" "^2.10.0"
     ethers "^5.4.7"
 
-"@gnosis.pm/safe-apps-sdk@^7.3.0":
-  version "7.4.0"
-  resolved "https://registry.npmjs.org/@gnosis.pm/safe-apps-sdk/-/safe-apps-sdk-7.4.0.tgz#05d9ba4fa21961161c2869e22e81534990294901"
-  integrity sha512-7YYtEnOioRWo7Lre2XBRxNlCFBseqizWBmkYcjPFBMP8K9blBrntyRo/jr+FdK+wss+85n80RatAP0v8KjmDSg==
-  dependencies:
-    "@gnosis.pm/safe-react-gateway-sdk" "^3.1.1"
-    ethers "^5.6.8"
-
 "@gnosis.pm/safe-apps-web3modal@^12.0.0":
   version "12.0.0"
   resolved "https://registry.npmjs.org/@gnosis.pm/safe-apps-web3modal/-/safe-apps-web3modal-12.0.0.tgz#43886896b49ba420fc95596bd2ef6ae562acc71a"
@@ -1125,13 +1117,6 @@
   version "2.10.3"
   resolved "https://registry.npmjs.org/@gnosis.pm/safe-react-gateway-sdk/-/safe-react-gateway-sdk-2.10.3.tgz#4537442a78eb0508c483aabcac19296335a77ac3"
   integrity sha512-ukaLACozdJQb2YGSAZgBUkF4CT9iKVjpnKFCKUnGGghXqp+Yyn9jpdcfFK0VYQJ6ZSwAm40tHtQaN3K9817Bcg==
-  dependencies:
-    cross-fetch "^3.1.5"
-
-"@gnosis.pm/safe-react-gateway-sdk@^3.1.1":
-  version "3.1.2"
-  resolved "https://registry.npmjs.org/@gnosis.pm/safe-react-gateway-sdk/-/safe-react-gateway-sdk-3.1.2.tgz#071a52a10ba37aa56513c06f086671d0e1b6c898"
-  integrity sha512-/7TPxXqFyoK8PjbBm6YygTwx+VUUTNxFp8F3ceY3jmJhWdtek+Wrr4o20HzPN1nidO9qiKjgoyQLg1fgjSVopw==
   dependencies:
     cross-fetch "^3.1.5"
 

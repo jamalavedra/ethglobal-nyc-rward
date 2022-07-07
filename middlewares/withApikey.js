@@ -50,7 +50,7 @@ const withApikey = (next) => async (req, res) => {
       String(dt.getMonth() + 1).padStart("2", "0") +
       String(parseInt(dt.getFullYear())).slice(2);
 
-    console.log(data);
+    console.log("REDIS data: ", data);
     if (data[0][1] == "true") {
       // Valid API key
       if (data[1][1] && parseInt(data[1][1]) >= CAP) {
@@ -68,7 +68,6 @@ const withApikey = (next) => async (req, res) => {
             CAP - parseInt(data[1][1]) - 1
           );
         }
-        console.log("next");
         return await next(req, res);
       }
     } else {

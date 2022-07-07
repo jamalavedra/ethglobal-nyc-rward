@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { SafeAppWeb3Modal as Web3Modal } from "@gnosis.pm/safe-apps-web3modal";
-import SafeAppsSDK from "@gnosis.pm/safe-apps-sdk";
 import Cookies from "js-cookie";
 import PropTypes from "prop-types";
 import fetcher from "@/utils/fetcher";
@@ -203,7 +202,6 @@ export const Web3ContextProvider = ({ children }) => {
 
   async function updateAuthToken(signerAddress, chainName, tempProvider) {
     let timestamp = Date.now();
-    let data = `I allow this site to access my data on Rward using the account ${signerAddress}. Timestamp:${timestamp}`;
 
     let dataV2 = rwardInstance.auth.getSignatureDataV2(
       "https://rward.xyz",
@@ -214,58 +212,21 @@ export const Web3ContextProvider = ({ children }) => {
 
     if (chainName === "ethereum") {
       let signature = "";
-      let isSafeApp = await web3Modal.isSafeApp();
 
-      if (isSafeApp === true) {
-        let ethProvider = await web3Modal.getProvider();
-        const appsSdk = new SafeAppsSDK();
-
-        // const safe = await appsSdk.safe.getInfo();
-
-        tempProvider = new ethers.providers.Web3Provider(ethProvider);
-        console.log("isSafeApp", isSafeApp, ethProvider);
-        // const appsSdk = new SafeAppsSDK();
-        // const safe = await appsSdk.safe.getInfo();
-        // console.log(safe, appsSdk.safe);
-
-        signature = await ethProvider.request({
-          method: "personal_sign",
-          params: [
-            ethers.utils.hexlify(ethers.utils.toUtf8Bytes(dataV2)),
-            signerAddress.toLowerCase(),
-          ],
-        });
-
-        setTimeout(async () => {
-          const messageHash = appsSdk.safe.calculateMessageHash(dataV2);
-          const messageIsSigned = await appsSdk.safe.isMessageSigned(dataV2);
-          console.log(messageHash, messageIsSigned);
-          res = await fetcher(
-            `/api/authV2?apikey=CS2v5qdHaGTmuMZ1Mg9uWHHi6Nz0ZqayGBflnst8`,
-            "POST",
-            {
-              signerAddress,
-              signature,
-              chain: "ethereum",
-            }
-          );
-        }, 10000);
-      } else {
-        signature = await tempProvider.send("personal_sign", [
-          ethers.utils.hexlify(ethers.utils.toUtf8Bytes(dataV2)),
-          signerAddress.toLowerCase(),
-        ]);
-        res = await fetcher(
-          `/api/authV2?apikey=CS2v5qdHaGTmuMZ1Mg9uWHHi6Nz0ZqayGBflnst8`,
-          "POST",
-          {
-            message: dataV2,
-            signature,
-            timestamp,
-            chain: "ethereum",
-          }
-        );
-      }
+      signature = await tempProvider.send("personal_sign", [
+        ethers.utils.hexlify(ethers.utils.toUtf8Bytes(dataV2)),
+        signerAddress.toLowerCase(),
+      ]);
+      res = await fetcher(
+        `/api/authV2?apikey=CS2v5qdHaGTmuMZ1Mg9uWHHi6Nz0ZqayGBflnst8`,
+        "POST",
+        {
+          message: dataV2,
+          signature,
+          timestamp,
+          chain: "ethereum",
+        }
+      );
     }
     if (res.success === true) {
       cookies.set("RWARD_SESSION", res["message"], {
